@@ -19,7 +19,7 @@ steps:
     backendServiceArm: 'azure-resource-manager-service-connection'
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-    backendAzureRmResourceGroupLocation: 'eastus'
+    backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'storagetsbdivya'
     backendAzureRmContainerName: 'storagetsbdivyacontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
