@@ -34,7 +34,7 @@ module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
   cluster_version = "17.24.0"
-  subnets     = ["subnet-032152eb8fd0fe039,subnet-0ee22985b188bb740"] #CHANGE # Donot choose subnet from us-east-1e
+  aws_subnet_ids   = ["subnet-032152eb8fd0fe039,subnet-0ee22985b188bb740"] #CHANGE # Donot choose subnet from us-east-1e
   vpc_id          = aws_default_vpc.default.id
 
   //Newly added entry to allow connection to the api server
