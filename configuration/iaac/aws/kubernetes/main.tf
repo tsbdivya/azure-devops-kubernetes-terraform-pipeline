@@ -56,7 +56,7 @@ module "in28minutes-cluster" {
   }
 }
 
-//>>Uncomment this section once EKS is created - Start
+Uncomment this section once EKS is created - Start
 data "aws_eks_cluster" "cluster" {
   name = "in28minutes-cluster" #module.in28minutes-cluster.cluster_name
 }
