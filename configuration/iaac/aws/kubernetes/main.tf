@@ -7,7 +7,7 @@
 
 terraform {
   backend "s3" {
-    bucket = "mybucket" # Will be overridden from build
+    bucket = "mybucket"       # Will be overridden from build
     key    = "path/to/my/key" # Will be overridden from build
     region = "us-east-1"
   }
@@ -31,19 +31,19 @@ provider "kubernetes" {
 module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
-  cluster_version = "1.14"
-  subnet         = "subnet-032152eb8fd0fe039" #CHANGE
+  cluster_version = "17.24.0"
+  aws_subnet_ids  = "subnet-032152eb8fd0fe039" #CHANGE
   #subnets = data.aws_subnet_ids.subnets.ids
-  vpc_id          = aws_default_vpc.default.id
+  vpc_id = aws_default_vpc.default.id
 
   #vpc_id         = "vpc-1234556abcdef"
 
-node_groups = [
+  node_groups = [
     {
-      instance_type = "t2.micro"
-      max_capacity  = 5
+      instance_type    = "t2.micro"
+      max_capacity     = 5
       desired_capacity = 3
-      min_capacity  = 3
+      min_capacity     = 3
     }
   ]
 }
@@ -78,5 +78,5 @@ resource "kubernetes_cluster_role_binding" "example" {
 
 # Needed to set the default region
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
 }
