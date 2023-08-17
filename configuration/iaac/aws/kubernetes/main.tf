@@ -7,7 +7,7 @@
 
 terraform {
   backend "s3" {
-    bucket = "mybucket" # Will be overridden from build
+    bucket = "mybucket"       # Will be overridden from build
     key    = "path/to/my/key" # Will be overridden from build
     region = "us-east-1"
   }
@@ -33,15 +33,15 @@ provider "kubernetes" {
 module "in28minutes-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "in28minutes-cluster"
-  cluster_version = "17.24.0"
-  subnet_ids         = ["subnet-032152eb8fd0fe039","subnet-0ee22985b188bb740"] #CHANGE # Donot choose subnet from us-east-1e
+  cluster_version = "1.23"
+  subnet_ids      = ["subnet-032152eb8fd0fe039", "subnet-0ee22985b188bb740"] #CHANGE # Donot choose subnet from us-east-1e
   vpc_id          = aws_default_vpc.default.id
 
   //Newly added entry to allow connection to the api server
   //Without this change error in step 163 in course will not go away
-  cluster_endpoint_public_access  = true
+  cluster_endpoint_public_access = true
 
-# EKS Managed Node Group(s)
+  # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
     instance_types = ["t2.small", "t2.medium"]
   }
@@ -59,9 +59,9 @@ module "in28minutes-cluster" {
 }
 
 //>>Uncomment this section once EKS is created - Start
- data "aws_eks_cluster" "cluster" {
-   name = "in28minutes-cluster" #module.in28minutes-cluster.cluster_name
- }
+data "aws_eks_cluster" "cluster" {
+  name = "in28minutes-cluster" #module.in28minutes-cluster.cluster_name
+}
 
 data "aws_eks_cluster_auth" "cluster" {
   name = "in28minutes-cluster" #module.in28minutes-cluster.cluster_name
@@ -90,5 +90,5 @@ resource "kubernetes_cluster_role_binding" "example" {
 
 # Needed to set the default region
 provider "aws" {
-  region  = "us-east-1"
+  region = "us-east-1"
 }
